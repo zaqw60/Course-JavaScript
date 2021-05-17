@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const table = document.createElement("table");
+        table.style.borderCollapse = 'collapse';
+        table.style.width = '240px';
+        table.style.height = '240px';
+        function initChess() {
+            for (let row = 0; row < 8; row++) {
+                const tr = document.createElement('tr');
+                for (let col = 0; col < 8; col++) {
+                    const td = document.createElement('td');
+                    if (row % 2 == col % 2) {
+                        td.style.backgroundColor = 'white'
+                    } else {
+                        td.style.backgroundColor = 'black'
+                    }
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            document.body.appendChild(table);
+        }
+        initChess();
+    </script>
+
+
+    <script>
+        const cart = [
+            item1 = {
+                name: 'фитинг',
+                price: 210,
+                quantity: 5
+            },
+            item2 = {
+                name: 'уголок',
+                price: 195,
+                quantity: 7
+            },
+            item3 = {
+                name: 'переход',
+                price: 95,
+                quantity: 4
+            },
+            item4 = {
+                name: 'муфта',
+                price: 77,
+                quantity: 14
+            },
+            item5 = {
+                name: 'тройник',
+                price: 275,
+                quantity: 5
+            },
+            item6 = {
+                name: 'труба',
+                price: 321,
+                quantity: 2
+            }
+        ];
+
+
+        let totalPrice = 0;
+        function countBasketPrice() {
+            for (let i = 0; i < cart.length; i++) {
+                totalPrice += cart[i].price * cart[i].quantity;
+            }
+            return totalPrice;
+        }
+        console.log(countBasketPrice(cart))
+
+
+
+        const myDiv = document.createElement("div");
+        const i = document.createElement('i');
+        myDiv.appendChild(i);
+        if (totalPrice == 0) {
+            i.innerHTML = 'Корзина пуста'
+        } else {
+            i.innerHTML = 'В корзине ' + cart.length + ' товаров на сумму ' + totalPrice + ' рублей';
+        }
+        console.log(i.innerHTML);
+        alert(i.innerHTML);
+    </script>
+</body>
+
+</html>
