@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function transform(number) {
+            let obj = {};
+            if (number > 999) return obj;
+            let a = Math.floor(number / 100);
+            console.log(obj);
+            let b = Math.floor((number - a * 100) / 10);
+            let c = (number - a * 100) - b * 10;
+            obj.units = c;
+            obj.ten = b;
+            obj.hundr = a;
+
+
+        }
+        console.log(transform(765));
+
+
+
+
+        const cart = [
+            item1 = {
+                name: 'фитинг',
+                price: 210,
+                quantity: 5
+            },
+            item2 = {
+                name: 'уголок',
+                price: 195,
+                quantity: 7
+            },
+            item3 = {
+                name: 'переход',
+                price: 95,
+                quantity: 4
+            },
+            item4 = {
+                name: 'муфта',
+                price: 77,
+                quantity: 14
+            },
+            item5 = {
+                name: 'тройник',
+                price: 275,
+                quantity: 5
+            },
+            item6 = {
+                name: 'труба',
+                price: 321,
+                quantity: 2
+            }
+        ];
+        function countBasketPrice() {
+            let totalPrice = 0;
+            for (let i = 0; i < cart.length; i++) {
+                totalPrice += cart[i].price * cart[i].quantity;
+            }
+            return totalPrice;
+        }
+        console.log(countBasketPrice(cart))
+        alert(countBasketPrice(cart));
+    </script>
+</body>
+
+</html>
