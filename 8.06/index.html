@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog</title>
+</head>
+
+<body>
+
+    <div class="catalog">
+        <h2>Каталог</h2>
+    </div>
+    <div class="cart">
+        <h2>Корзина</h2>
+    </div>
+    <script>
+
+        const catalogBlock = {
+            render(item) {
+                return `<div class="item">
+                        <div><b>Наименование</b>: ${item.name}</div>
+                        <div><b>Цена за шт.</b>: ${item.price} руб.</div>
+                            <button class="item-btn" data-id_product="${item.id_product}">Купить</button>
+                            </div>`;
+            }
+        };
+
+        const cartBlock = {
+            render(unit) {
+                // let quantity = 1;
+                return `<div class="item">
+                        <div><b>Наименование</b>: ${unit.name}</div>
+                        <div><b>Цена за шт.</b>: ${unit.price} руб.</div>
+                        <p>Количество: ${unit.quantity} шт.</p>
+                            </div>`
+            }
+        };
+
+        const catalog = {
+            catalogListBlock: null,
+            catalogBlock,
+            cart: null,
+            items: [
+                {
+                    name: 'фитинг',
+                    id_product: 1,
+                    price: 210,
+                },
+                {
+                    name: 'уголок',
+                    id_product: 2,
+                    price: 195,
+                },
+                {
+                    name: 'переход',
+                    id_product: 3,
+                    price: 95,
+                },
+                {
+                    name: 'муфта',
+                    id_product: 4,
+                    price: 77,
+                },
+                {
+                    name: 'тройник',
+                    id_product: 5,
+                    price: 275,
+                },
+                {
+                    name: 'труба',
+                    id_product: 6,
+                    price: 321,
+                }
+            ],
+
+
+            Init() {
+                this.catalogListBlock = document.querySelector('.catalog');
+                this.cart = cart;
+                this.render();
+                this.addEventHandlers();
+            },
+
+            render() {
+                this.items.forEach(item => {
+                    this.catalogListBlock.insertAdjacentHTML('beforeend', this.catalogBlock.render(item));
+                });
+            },
+
+            addEventHandlers() {
+                this.catalogListBlock.addEventListener('click', event => this.addToCart(event))
+            },
+
+            addToCart(event) {
+                if (!event.target.classList.contains('item-btn')) return;
+                const product = +event.target.dataset.id_product;
+                const addProduct = this.items.find((item) => item.id_product == product);
+                if (this.cart.units.length == 0) {
+                    addProduct.quantity = 1;
+                    this.cart.units.push(addProduct);
+                } else {
+                    if (addProduct == this.cart.units.find((item) => item.id_product == addProduct.id_product)) {
+                        addProduct.quantity++;
+                    } else {
+                        addProduct.quantity = 1;
+                        this.cart.units.push(addProduct)
+                    };
+
+                };
+
+                let totalPrice = 0;
+                let total = this.cart.units.length;
+                this.cart.units.forEach(unit => { totalPrice += unit.quantity * unit.price });
+                cart.init(total, totalPrice);
+            }
+        };
+
+        const cart = {
+            cartListBlock: null,
+            cartBlock,
+            units: [
+                // {
+                //     name: 'фитинг',
+                //     price: 210,
+                // },
+            ],
+
+            init(total, totalPrice) {
+                this.cartListBlock = document.querySelector('.cart');
+                this.renderCart(total, totalPrice);
+            },
+
+            renderCart(total, totalPrice) {
+                this.cartListBlock.innerHTML = '<h2>Корзина</h2>';
+                this.units.forEach(unit => {
+                    this.cartListBlock.insertAdjacentHTML('beforeend', this.cartBlock.render(unit));
+                });
+                // this.cartListBlock.insertAdjacentHTML('beforeend', this.score(total, totalPrice));
+            },
+
+
+
+
+
+        };
+
+        catalog.Init();
+            // cart.init();
+
+
+    </script>
+</body>
+
+</html>
